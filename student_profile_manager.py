@@ -11,26 +11,25 @@ class Student(ABC):
     def study_mode(self):
         pass    
     
+    @staticmethod    
+    def valid_roll_number(roll):
+        return roll > 0
+
     def display_info(self):
         print(self.name)   
         print(self.roll_number)   
         print(self.course)  
         print(self.student_class)
         
-class OnlineStudent(Student):
-    def online_info(self):
-        self.display_info()
-        
+class OnlineStudent(Student):    
     def study_mode(self):
-        print(f"{self.name} in online Program")
-
-class OfflineStudent(Student):
-    def offline_info(self):
         self.display_info()
-        
-    def study_mode(self):
-        print(f"{self.name} in offline Program")
+        return f"{self.name} in online Program"
 
+class OfflineStudent(Student):        
+    def study_mode(self):
+        self.display_info()
+        return f"{self.name} in offline Program"
         
 s1 = OnlineStudent("Tarun", 7 , "Ethical Hacking","10th")
 s2 = OfflineStudent("Ritu", 28 , "Full Stack","12th")
@@ -38,6 +37,9 @@ s2 = OfflineStudent("Ritu", 28 , "Full Stack","12th")
 students = [s1,s2]
 
 for s in students:
-    s.display_info()
-    s.study_mode()
+    print(s.study_mode())
+    if not Student.valid_roll_number(7):
+        print("Not valid Roll Number")
     print("-" * 20)
+
+    
